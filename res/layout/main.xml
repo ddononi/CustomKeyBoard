@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/xMLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:focusable="true"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/xsubLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:keepScreenOn="true"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/xEt"
+            android:layout_width="fill_parent"
+            android:layout_height="400dp"
+            android:focusableInTouchMode="true"
+            android:gravity="top"
+            android:singleLine="false" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/xK1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+
+                <include
+                    android:id="@+id/xKeyBoard"
+                    layout="@layout/keyboard" >
+                </include>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</RelativeLayout>
