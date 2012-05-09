@@ -12,28 +12,30 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-
+/**
+ *	키보드 설정 엑티비티
+ */
 public class Main extends Activity implements OnTouchListener, OnClickListener,
 		OnFocusChangeListener {
 	private EditText mEt, mEt1; // Edit Text boxes
 	private Button mBSpace, mBdone, mBack, mBChange, mNum;
 	private RelativeLayout mLayout, mKLayout;
 	private boolean isEdit = false, isEdit1 = false;
-	private String mUpper = "upper", mLower = "lower";
+	private final String mUpper = "upper", mLower = "lower";
 	private int w, mWindowWidth;
-	private String sL[] = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+	private final String sL[] = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
 			"k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w",
-			"x", "y", "z", "챌", "횪", "챕", "챔", "청", "챤" };
-	private String cL[] = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+			"x", "y", "z", "^.^", "^^;", "^o^", "ㅋㅋ", "하이", "ㅎ" };
+	private final String cL[] = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
 			"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W",
-			"X", "Y", "Z", "챌", "횪", "챕", "챔", "청", "챤" };
-	private String nS[] = { "!", ")", "'", "#", "3", "$", "%", "&", "8", "*",
+			"X", "Y", "Z", "\n", "^.^", "^.^", "^.^", "^.^", "^.^" };
+	private final String nS[] = { "!", ")", "'", "#", "3", "$", "%", "&", "8", "*",
 			"?", "/", "+", "-", "9", "0", "1", "4", "@", "5", "7", "(", "2",
-			"\"", "6", "_", "=", "]", "[", "<", ">", "|" };
-	private Button mB[] = new Button[32];
+			"\"", "6", "_", "\n", "]", "[", "<", ">", "|" };
+	private final Button mB[] = new Button[32];
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		try {
 			setContentView(R.layout.main);
@@ -64,22 +66,24 @@ public class Main extends Activity implements OnTouchListener, OnClickListener,
 	}
 
 	@Override
-	public boolean onTouch(View v, MotionEvent event) {
+	public boolean onTouch(final View v, final MotionEvent event) {
 		if (v == mEt) {
 			hideDefaultKeyboard();
 			enableKeyboard();
 
 		}
+		/*
 		if (v == mEt1) {
 			hideDefaultKeyboard();
 			enableKeyboard();
 
 		}
+		*/
 		return true;
 	}
 
 	@Override
-	public void onClick(View v) {
+	public void onClick(final View v) {
 
 		if (v == mBChange) {
 
@@ -118,20 +122,16 @@ public class Main extends Activity implements OnTouchListener, OnClickListener,
 	}
 
 	@Override
-	public void onFocusChange(View v, boolean hasFocus) {
+	public void onFocusChange(final View v, final boolean hasFocus) {
 		if (v == mEt && hasFocus == true) {
 			isEdit = true;
 			isEdit1 = false;
-
-		} else if (v == mEt1 && hasFocus == true) {
-			isEdit = false;
-			isEdit1 = true;
 
 		}
 
 	}
 
-	private void addText(View v) {
+	private void addText(final View v) {
 		if (isEdit == true) {
 			String b = "";
 			b = (String) v.getTag();
@@ -155,7 +155,7 @@ public class Main extends Activity implements OnTouchListener, OnClickListener,
 
 	}
 
-	private void isBack(View v) {
+	private void isBack(final View v) {
 		if (isEdit == true) {
 			CharSequence cc = mEt.getText();
 			if (cc != null && cc.length() > 0) {
@@ -175,50 +175,58 @@ public class Main extends Activity implements OnTouchListener, OnClickListener,
 					mEt1.append(cc.subSequence(0, cc.length() - 1));
 				}
 			}
-		} 
+		}
 	}
 	private void changeSmallLetters() {
 		mBChange.setVisibility(Button.VISIBLE);
-		for (int i = 0; i < sL.length; i++)
+		for (int i = 0; i < sL.length; i++) {
 			mB[i].setText(sL[i]);
+		}
 		mNum.setTag("12#");
 	}
 	private void changeSmallTags() {
-		for (int i = 0; i < sL.length; i++)
+		for (int i = 0; i < sL.length; i++) {
 			mB[i].setTag(sL[i]);
+		}
 		mBChange.setTag("lower");
 		mNum.setTag("num");
 	}
 	private void changeCapitalLetters() {
 		mBChange.setVisibility(Button.VISIBLE);
-		for (int i = 0; i < cL.length; i++)
+		for (int i = 0; i < cL.length; i++) {
 			mB[i].setText(cL[i]);
+		}
 		mBChange.setTag("upper");
 		mNum.setText("12#");
 
 	}
 
 	private void changeCapitalTags() {
-		for (int i = 0; i < cL.length; i++)
+		for (int i = 0; i < cL.length; i++) {
 			mB[i].setTag(cL[i]);
+		}
 		mNum.setTag("num");
 
 	}
 
 	private void changeSyNuLetters() {
 
-		for (int i = 0; i < nS.length; i++)
+		for (int i = 0; i < nS.length; i++) {
 			mB[i].setText(nS[i]);
+		}
 		mNum.setText("ABC");
 	}
 
 	private void changeSyNuTags() {
-		for (int i = 0; i < nS.length; i++)
+		for (int i = 0; i < nS.length; i++) {
 			mB[i].setTag(nS[i]);
+		}
 		mNum.setTag("ABC");
 	}
 
-	// enabling customized keyboard
+	/**
+	 * 커스텀 키보드 보이기
+	 */
 	private void enableKeyboard() {
 
 		mLayout.setVisibility(RelativeLayout.VISIBLE);
@@ -226,13 +234,18 @@ public class Main extends Activity implements OnTouchListener, OnClickListener,
 
 	}
 
-	// Disable customized keyboard
+	/**
+	 * 커스텀 키보드 숨기기
+	 */
 	private void disableKeyboard() {
 		mLayout.setVisibility(RelativeLayout.INVISIBLE);
 		mKLayout.setVisibility(RelativeLayout.INVISIBLE);
 
 	}
 
+	/**
+	 *	EditText에 포커스시 키보드가 올라오는 이벤트를 방지한다.
+	 */
 	private void hideDefaultKeyboard() {
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -264,7 +277,10 @@ public class Main extends Activity implements OnTouchListener, OnClickListener,
 		mB[15].setHeight(50);
 
 	}
-
+	/**
+	 * 버튼 크기 설정
+	 * 넒이 높이
+	 */
 	private void setSrow() {
 		w = (mWindowWidth / 10);
 		mB[0].setWidth(w);
@@ -290,7 +306,10 @@ public class Main extends Activity implements OnTouchListener, OnClickListener,
 		mB[11].setHeight(50);
 		mB[26].setHeight(50);
 	}
-
+	/**
+	 * 버튼 크기 설정
+	 * 넒이 높이
+	 */
 	private void setTrow() {
 		w = (mWindowWidth / 12);
 		mB[25].setWidth(w);
@@ -334,11 +353,15 @@ public class Main extends Activity implements OnTouchListener, OnClickListener,
 
 	}
 
+	/**
+	 * 키 설정
+	 */
 	private void setKeys() {
+		// 윈도우 넒이 얻기
 		mWindowWidth = getWindowManager().getDefaultDisplay().getWidth(); // getting
 		// window
 		// height
-		// getting ids from xml files
+		// 버튼 엘리먼트 후킹
 		mB[0] = (Button) findViewById(R.id.xA);
 		mB[1] = (Button) findViewById(R.id.xB);
 		mB[2] = (Button) findViewById(R.id.xC);
@@ -365,7 +388,7 @@ public class Main extends Activity implements OnTouchListener, OnClickListener,
 		mB[23] = (Button) findViewById(R.id.xX);
 		mB[24] = (Button) findViewById(R.id.xY);
 		mB[25] = (Button) findViewById(R.id.xZ);
-		mB[26] = (Button) findViewById(R.id.xS1);
+		mB[26] = (Button) findViewById(R.id.enter);
 		mB[27] = (Button) findViewById(R.id.xS2);
 		mB[28] = (Button) findViewById(R.id.xS3);
 		mB[29] = (Button) findViewById(R.id.xS4);
@@ -376,8 +399,9 @@ public class Main extends Activity implements OnTouchListener, OnClickListener,
 		mBChange = (Button) findViewById(R.id.xChange);
 		mBack = (Button) findViewById(R.id.xBack);
 		mNum = (Button) findViewById(R.id.xNum);
-		for (int i = 0; i < mB.length; i++)
-			mB[i].setOnClickListener(this);
+		for (Button element : mB) {
+			element.setOnClickListener(this);
+		}
 		mBSpace.setOnClickListener(this);
 		mBdone.setOnClickListener(this);
 		mBack.setOnClickListener(this);
